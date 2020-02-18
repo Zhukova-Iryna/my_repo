@@ -50,11 +50,12 @@ public class ErrorMessageTest extends BaseTest {
         driver.findElement(By.id("RegisterUserFirmForm_user_email")).sendKeys("bu9ira@gmail.com");
         driver.findElement(By.id("user_user_password")).sendKeys("test2010");
         driver.findElement(By.xpath("//div[contains(@class,'mt_10')]")).click();
-        Assert.assertEquals(driver.findElement(By.xpath("//div[contains(text(),'email')]")).getText(), "Такой email уже существует.");
+        Assert.assertTrue(driver.findElement(By.className("error-text")).isDisplayed(), "Error message appears");
+        //Assert.assertEquals(driver.findElement(By.xpath("//div[contains(text(),'email')]")).getText(), "Такой email уже существует.");
     }
 
-    @AfterMethod
+    /*@AfterMethod
     public void tearDown() {
         driver.quit();
-    }
+    }*/
 }

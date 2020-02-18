@@ -6,16 +6,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class SearchFunctionTest extends BaseTest {
-
-    @BeforeMethod
-    public void openPage() {
-        openMainPage();
-    }
 
     @Test
     public void searchStartsTest(){
@@ -38,10 +31,14 @@ public class SearchFunctionTest extends BaseTest {
         Assert.assertTrue(counter > 0 );
     }
 
-    @Test
+   /* @Test
     public void sortingFunctionTest(){
         driver.findElement(By.id("SearchForm_searchPhrase")).sendKeys("Samsung A50" + Keys.ENTER);
-        List<WebElement> elements = driver.findElements(By.xpath("//div[starts-with(@class, 'product-block type2 ga_container')]"));
+        driver.findElement(By.linkText("Сравнить цены")).click();
+        driver.findElement(By.xpath("//li[@class='block-wrapper simple3 prices active']")).click();
+        driver.findElement(By.xpath("//a[@class='ga_cat_sort link active']")).click();
+        driver.findElement(By.xpath("//div[@class='sort-buttons active']//div//a[1]//span[1]")).click();
+        List<WebElement> elements = driver.findElements(By.className("priceline-item priceline-split ga_container clearer-block no-phone is-notbid"));
         System.out.println(elements.size());
         int counter = 0;
         for (WebElement we: elements) {
@@ -51,10 +48,7 @@ public class SearchFunctionTest extends BaseTest {
         }
         System.out.println(counter);
         Assert.assertTrue(counter > 0 );
-    }
+    }*/
 
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
-    }
+
 }
