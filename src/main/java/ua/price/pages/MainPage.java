@@ -1,55 +1,59 @@
-import org.openqa.selenium.JavascriptExecutor;
+package ua.price.pages;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import ua.price.base.BasePage;
 
 public class MainPage extends BasePage {
 
-    @FindBy(xpath = ".//div[@id = 'auth-user-links']")
+    @FindBy(xpath = ".//div[@id='auth-user-block']")
     private WebElement loginLink;
 
-    @FindBy(id = "header-user-link")
+    @FindBy(xpath = ".//a[@id='header-user-link']")
     private WebElement userAccount;
 
-    @FindBy(id = "SearchForm_searchPhrase")
-    private WebElement searchField;
+    @FindBy(xpath = ".//input[@id='SearchForm_searchPhrase']")
+    private WebElement searchFieldInput;
 
-    @FindBy(id = "LoginForm_username")
+    @FindBy(xpath = ".//input[@id = 'LoginForm_username']")
     private WebElement emailField;
 
-    @FindBy(id = "login_user_password")
+    @FindBy(xpath = ".//input[@id = 'login_user_password']")
     private WebElement passwordField;
 
     @FindBy(xpath = ".//div[contains(@class,'pt_20')]")
-    private WebElement submitLogin;
+    private WebElement submitLoginButton;
 
-    @FindBy(id = "go-tab-recovery")
+    @FindBy(xpath = ".//a[@id = 'go-tab-recovery']")
     private WebElement recoveryPasswordLink;
 
-    @FindBy(id = "go-tab-userregister")
+    @FindBy(xpath = ".//div[@id = 'go-tab-userregister']")
     private WebElement registrationTab;
-
-    @FindBy(id = "login_user_password")
-    private WebElement passField;
-
-    @FindBy(xpath = ".//div[contains(@class,'pt_20')]")
-    private WebElement submitButton;
 
     @FindBy(xpath = ".//div[@class='error-text'][contains(text(),'.')]")
     private WebElement errorLabel;
 
-    @FindBy(id = "RegisterUserFirmForm_user_email")
+    @FindBy(xpath = ".//input[@id = 'RegisterUserFirmForm_user_email']")
     private WebElement regEmailField;
 
-    @FindBy(id = "user_user_password")
+    @FindBy(xpath = ".//input[@id = 'user_user_password']")
     private WebElement regPasswordField;
 
     @FindBy(xpath = "//div[contains(@class,'mt_10')]")
     private WebElement submitRegistration;
 
-    @FindBy(id = "SearchForm_searchPhrase")
-    private WebElement searchInput;
+    @FindBy(xpath = ".//div[@class = 'reg-success-text']")
+    private WebElement confirmRegistrationMessage;
+
+    @FindBy(xpath = ".//div[@id='google_ads_iframe_/6560281/Price_Promo_text_1_0__container__']")
+    WebElement popularCategoryAd;
+
+    /*@FindBy(xpath = ".//div[@id='main-autoscroll']//div[@class='item']")
+    List<WebElement> popularCategoriesBanner;*/
 
     /*@FindBy(xpath = "//div[@class='form-wrap clearer-block']//span[@class^='soc-btn-facebook ga_user_login_page_social_click'][contains(text(),'facebook')]")
     WebElement authByFacebook;
@@ -81,22 +85,20 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//button[contains(@class,'ga_register_user_popup_close']")
     WebElement closeFormButton;*/
 
-    public MainPage(WebDriver driver){
+    public MainPage(WebDriver driver) {
         super(driver);
     }
 
-    // Fill login form and submit
     public void fillLoginForm(String email, String password) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", loginLink);
-        //clickWebElement(loginLink);
+        waitUntilPageLoaded();
+        clickWebElement(loginLink);
         enterTextInTextField(emailField, email);
         enterTextInTextField(passwordField, password);
-        clickWebElement(submitButton);
+        clickWebElement(submitLoginButton);
     }
 
-    // Tab to registration and fill registration form and submit
     public void fillRegistrationForm(String email, String password) {
+        waitUntilPageLoaded();
         clickWebElement(loginLink);
         clickWebElement(registrationTab);
         enterTextInTextField(regEmailField, email);
@@ -104,20 +106,28 @@ public class MainPage extends BasePage {
         clickWebElement(submitRegistration);
     }
 
-    // Get title from login button
     public String getAccountName() {
         return userAccount.getText();
     }
 
-    // Check is error message appears
     public boolean checkErrorLoginMessageAppears() {
         System.out.println(errorLabel.getText());
         return errorLabel.isDisplayed();
     }
 
-    // Fill search field and open search result page
-    public void runSearch(String searchRequest) {
-        searchInput.sendKeys(searchRequest + Keys.ENTER);
+    public boolean checkConfirmRegistrationMessageAppears() {
+        return confirmRegistrationMessage.isDisplayed();
+    }
+
+    public SearchPage runSearch(String searchRequest) {
+        searchFieldInput.sendKeys(searchRequest + Keys.ENTER);
+        return new SearchPage(driver);
+    }
+
+
+    public void waitUntilPageLoaded() {
+        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(popularCategoryAd));
+        System.out.println("load");
     }
 
 }

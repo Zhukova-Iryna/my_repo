@@ -1,13 +1,14 @@
+package ua.price.tests;
+
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import ua.price.base.BaseTest;
+import ua.price.pages.MainPage;
+import ua.price.pages.SearchPage;
+import ua.price.properties.PropertyReader;
 
 public class MainPageTest extends BaseTest {
     private MainPage mainPage;
@@ -20,58 +21,45 @@ public class MainPageTest extends BaseTest {
     private String searchRequest;
 
     @BeforeClass
-    public void setUp() {
-        String commonProperties = "src/main/resources/test-properties.properties";
-        Properties properties = new Properties();
-
-        if (commonProperties != null) {
-            try {
-                properties.load(new FileReader(commonProperties));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        baseUrl = properties.getProperty("baseurl");
-        email = properties.getProperty("validemail");
-        password = properties.getProperty("validpassword");
-        regEmail = properties.getProperty("regemail");
-        regPassword = properties.getProperty("regpassword");
-        searchRequest = properties.getProperty("searchrequest");
+    protected void setUp() {
+        baseUrl = PropertyReader.getProperty("base_url");
+        email = PropertyReader.getProperty("login_email");
+        password = PropertyReader.getProperty("login_password");
+        regEmail = PropertyReader.getProperty("reg_email");
+        regPassword = PropertyReader.getProperty("reg_password");
+        searchRequest = PropertyReader.getProperty("search_request");
         driver.get(baseUrl);
         mainPage = new MainPage(driver);
     }
 
-
     @Test
-    public void checkPositiveLoginScenario() {
+    protected void checkPositiveLoginScenario() {
         mainPage.fillLoginForm(email, password);
         Assert.assertNotEquals(mainPage.getAccountName(), "Вход", "Text doesn't change in authentication block");
     }
 
     @Test
-    public void checkNegativeLoginScenario() {
+    protected void checkNegativeLoginScenario() {
         mainPage.fillLoginForm(email, regPassword);
         Assert.assertTrue(mainPage.checkErrorLoginMessageAppears(), "Error message doesn't appears");
     }
 
     @Test
-    public void checkPositiveRegistrationScenario() {
+    protected void checkPositiveRegistrationScenario() {
         mainPage.fillRegistrationForm(regEmail, regPassword);
-        Assert.assertTrue(driver.findElement(By.xpath(".//div[@class = 'reg-success-text']")).isDisplayed(), "Successful registration message doesn't appear");
+        Assert.assertTrue(mainPage.checkConfirmRegistrationMessageAppears(), "Successful registration message doesn't appear");
     }
 
     @Test
-    public void checkNegativeRegistrationScenario() {
+    protected void checkNegativeRegistrationScenario() {
         mainPage.fillRegistrationForm(email, regPassword);
         Assert.assertTrue(mainPage.checkErrorLoginMessageAppears(), "Error message doesn't appears");
     }
 
     @Test
-    public void searchStartsTest() {
-        mainPage.runSearch(searchRequest);
+    protected void searchStartsTest() {
+        SearchPage searchPage = mainPage.runSearch(searchRequest);
         new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//div[@id='page-breadcrumbs']")));
         Assert.assertTrue(driver.getTitle().contains("Поиск"), "Search page doesn't open");
     }
-
 }
