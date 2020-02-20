@@ -1,12 +1,12 @@
 package ua.price.pages;
 
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import ua.price.base.BasePage;
+        import org.openqa.selenium.Keys;
+        import org.openqa.selenium.WebDriver;
+        import org.openqa.selenium.WebElement;
+        import org.openqa.selenium.support.FindBy;
+        import org.openqa.selenium.support.ui.ExpectedConditions;
+        import org.openqa.selenium.support.ui.WebDriverWait;
+        import ua.price.base.BasePage;
 
 public class MainPage extends BasePage {
 
@@ -50,40 +50,7 @@ public class MainPage extends BasePage {
     private WebElement confirmRegistrationMessage;
 
     @FindBy(xpath = ".//div[@id='google_ads_iframe_/6560281/Price_Promo_text_1_0__container__']")
-    WebElement popularCategoryAd;
-
-    /*@FindBy(xpath = ".//div[@id='main-autoscroll']//div[@class='item']")
-    List<WebElement> popularCategoriesBanner;*/
-
-    /*@FindBy(xpath = "//div[@class='form-wrap clearer-block']//span[@class^='soc-btn-facebook ga_user_login_page_social_click'][contains(text(),'facebook')]")
-    WebElement authByFacebook;
-
-    @FindBy(xpath = "//div[@class='form-wrap clearer-block']//span[@class='soc-btn-twitter ga_user_login_page_social_click'][contains(text(),'twitter')]")
-    WebElement authByTwitter;
-
-    @FindBy(xpath = "//div[@class='form-wrap clearer-block']//span[@class='soc-btn-google ga_user_login_page_social_click'][contains(text(),'google')]")
-    WebElement authByGoogle;
-
-    @FindBy(xpath = "//div[@class='form-content type-login']//a[@class='link-window-open ga_footer_agreement']")
-    WebElement usersAgreementLink;
-
-    @FindBy(xpath = "//div[@class='form-content type-login']//label")
-    WebElement usersAgreementAcceptedCheckbox;
-
-    @FindBy(xpath = "//div[@class='right-block-inputs']//div[1]//div[1]")
-    WebElement blankEmailFieldMessage;
-
-    @FindBy(xpath = "//div[@id='tab-login']//div[@class='right-block-inputs']//div[2]//div[1]")
-    WebElement blankPasswordFieldMessage;
-
-    @FindBy(xpath = "//div[@class='right-block-inputs']//div[2]//div[1]")
-    WebElement blankRegEmailFieldMessage;
-
-    @FindBy(xpath = "//div[@class='right-block-inputs']//div[3]//div[1]")
-    WebElement blankRegPasswordFieldMessage;
-
-    @FindBy(xpath = "//button[contains(@class,'ga_register_user_popup_close']")
-    WebElement closeFormButton;*/
+    private WebElement popularCategoryAd;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -124,10 +91,7 @@ public class MainPage extends BasePage {
         return new SearchPage(driver);
     }
 
-
     public void waitUntilPageLoaded() {
         new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(popularCategoryAd));
-        System.out.println("load");
     }
-
 }

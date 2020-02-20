@@ -9,11 +9,14 @@ import java.util.List;
 
 public class SearchPage extends BasePage {
 
+    @FindBy(xpath = ".//div[@id='page-breadcrumbs']")
+    private WebElement pageBreadcrumbs;
+
     @FindBy(xpath = ".//div[@id = 'fluid-grid']")
-    WebElement searchResultBlock;
+    private WebElement searchResultBlock;
 
     @FindBy(xpath = ".//div[contains(@class, 'product-block type')]")
-    List<WebElement> searchResultList;
+    private List<WebElement> searchResultList;
 
     public SearchPage(WebDriver driver) {
         super(driver);
@@ -22,7 +25,7 @@ public class SearchPage extends BasePage {
     public int getNumbersOfElementsAccordingToValue(String value) {
         int counter = 0;
         for (WebElement we : searchResultList) {
-            if (we.getText().contains("Samsung A50")) {
+            if (we.getText().contains(value)) {
                 counter++;
             }
         }
