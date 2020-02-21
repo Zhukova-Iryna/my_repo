@@ -1,12 +1,12 @@
 package ua.price.pages;
 
-        import org.openqa.selenium.Keys;
-        import org.openqa.selenium.WebDriver;
-        import org.openqa.selenium.WebElement;
-        import org.openqa.selenium.support.FindBy;
-        import org.openqa.selenium.support.ui.ExpectedConditions;
-        import org.openqa.selenium.support.ui.WebDriverWait;
-        import ua.price.base.BasePage;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import ua.price.base.BasePage;
 
 public class MainPage extends BasePage {
 
@@ -52,6 +52,12 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//div[@id='google_ads_iframe_/6560281/Price_Promo_text_1_0__container__']")
     private WebElement popularCategoryAd;
 
+    @FindBy(xpath = ".//div[@id='auth-user-links']")
+    private WebElement loginUsersSignOut;
+
+    @FindBy(xpath = ".//a[@class='i-profile']")
+    private WebElement goToProfileLink;
+
     public MainPage(WebDriver driver) {
         super(driver);
     }
@@ -93,5 +99,15 @@ public class MainPage extends BasePage {
 
     public void waitUntilPageLoaded() {
         new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(popularCategoryAd));
+    }
+
+    public String getAttributeForLoginUserLogoutForm() {
+        clickWebElement(userAccount);
+        return loginUsersSignOut.getAttribute("style");
+    }
+
+    public UserAccountPage openUserAccount(String email, String password) {
+        fillLoginForm(email, password);
+        return new UserAccountPage(driver);
     }
 }

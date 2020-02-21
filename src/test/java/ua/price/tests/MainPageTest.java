@@ -6,26 +6,12 @@ import ua.price.pages.MainPage;
 import ua.price.pages.SearchPage;
 
 import static org.testng.Assert.*;
-import static ua.price.properties.PropertyReader.*;
 
 public class MainPageTest extends BaseTest {
     private MainPage mainPage;
-    private String baseUrl;
-    private String email;
-    private String password;
-    private String regEmail;
-    private String regPassword;
-    private String empty = "";
-    private String searchRequest;
 
     @BeforeClass
     protected void setUp() {
-        baseUrl = getProperty("base_url");
-        email = getProperty("login_email");
-        password = getProperty("login_password");
-        regEmail = getProperty("reg_email");
-        regPassword = getProperty("reg_password");
-        searchRequest = getProperty("search_request");
         driver.get(baseUrl);
         mainPage = new MainPage(driver);
     }
@@ -58,5 +44,11 @@ public class MainPageTest extends BaseTest {
     protected void checkSearchPageOpens() {
         SearchPage searchPage = mainPage.runSearch(searchRequest);
         assertTrue(searchPage.driver.getTitle().contains("Поиск"), "Search page doesn't open");
+    }
+
+    @Test
+    protected void checkUsersLogout() {
+        mainPage.fillLoginForm(email, password);
+        assertNotEquals(mainPage.getAttributeForLoginUserLogoutForm(), "display: none;", "Users logout form doesn't open");
     }
 }

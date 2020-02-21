@@ -18,6 +18,9 @@ public class SearchPage extends BasePage {
     @FindBy(xpath = ".//div[contains(@class, 'product-block type')]")
     private List<WebElement> searchResultList;
 
+    @FindBy(xpath = ".//a[contains(@class,'btn-orange')]")
+    private WebElement itemPageButton;
+
     public SearchPage(WebDriver driver) {
         super(driver);
     }
@@ -30,5 +33,10 @@ public class SearchPage extends BasePage {
             }
         }
         return counter;
+    }
+
+    public String getElement() {
+        System.out.println(pageBreadcrumbs.isEnabled());
+        return pageBreadcrumbs.getTagName();
     }
 }
