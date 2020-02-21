@@ -34,6 +34,10 @@ public class UserAccountPage extends BasePage {
     @FindBy(xpath = ".//div[contains(@class,'alert-success')]")
     WebElement successMessage;
 
+    public UserAccountPage(WebDriver driver) {
+        super(driver);
+    }
+
     public boolean isHobbyChecked() {
         return checkBoxTourismHobby.isSelected();
     }
@@ -51,9 +55,5 @@ public class UserAccountPage extends BasePage {
 
     public boolean isSuccessMessageAppears() {
         return successMessage.isDisplayed();
-    }
-
-    public UserAccountPage(WebDriver driver) {
-        super(driver);
     }
 }

@@ -6,26 +6,12 @@ import ua.price.pages.MainPage;
 import ua.price.pages.SearchPage;
 
 import static org.testng.Assert.*;
-import static ua.price.properties.PropertyReader.*;
 
 public class MainPageTest extends BaseTest {
     private MainPage mainPage;
-    private String baseUrl;
-    private String email;
-    private String password;
-    private String regEmail;
-    private String regPassword;
-    private String empty = "";
-    private String searchRequest;
 
     @BeforeClass
     protected void setUp() {
-        baseUrl = getProperty("base_url");
-        email = getProperty("login_email");
-        password = getProperty("login_password");
-        regEmail = getProperty("reg_email");
-        regPassword = getProperty("reg_password");
-        searchRequest = getProperty("search_request");
         driver.get(baseUrl);
         mainPage = new MainPage(driver);
     }

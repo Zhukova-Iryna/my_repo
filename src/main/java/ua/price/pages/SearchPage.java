@@ -19,7 +19,7 @@ public class SearchPage extends BasePage {
     private List<WebElement> searchResultList;
 
     @FindBy(xpath = ".//a[contains(@class,'btn-orange')]")
-    WebElement itemPageButton;
+    private WebElement itemPageButton;
 
     public SearchPage(WebDriver driver) {
         super(driver);
