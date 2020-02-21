@@ -59,4 +59,10 @@ public class MainPageTest extends BaseTest {
         SearchPage searchPage = mainPage.runSearch(searchRequest);
         assertTrue(searchPage.driver.getTitle().contains("Поиск"), "Search page doesn't open");
     }
+
+    @Test
+    protected void checkUsersLogout() {
+        mainPage.fillLoginForm(email, password);
+        assertNotEquals(mainPage.getAttributeForLoginUserLogoutForm(), "display: none;", "Users logout form doesn't open");
+    }
 }

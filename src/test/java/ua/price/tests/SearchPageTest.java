@@ -22,6 +22,7 @@ public class SearchPageTest extends BaseTest {
 
     @Test
     protected void relevantSearchResultsTest() {
+        System.out.println(searchPage.getElement());
         assertTrue(searchPage.getNumbersOfElementsAccordingToValue(searchRequest) > 0, "Search results are invalid");
     }
 }
