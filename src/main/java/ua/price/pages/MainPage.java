@@ -91,23 +91,18 @@ public class MainPage extends BasePage {
 
     public SearchPage runSearch(String searchRequest) {
         searchFieldInput.sendKeys(searchRequest + Keys.ENTER);
-        new WaitUtils(driver).waitUntilPageLoaded(5);
+        waitUtils.waitUntilPageLoaded();
         return new SearchPage(driver);
     }
 
     public String getAttributeForLoginUserLogoutForm() {
-        new WaitUtils(driver).waitUntilPageLoaded(5);
+        new WaitUtils(driver).waitUntilPageLoaded();
         clickWebElement(userAccount);
-        return new WaitUtils(driver).waitElement(loginUsersSignOut, 30, 5).getAttribute("style");
-    }
-
-    public UserAccountPage openUserAccount(String email, String password) {
-        fillLoginForm(email, password);
-        return new UserAccountPage(driver);
+        return waitUtils.waitForElement(loginUsersSignOut).getAttribute("style");
     }
 
     public void openLoginForm() {
-        new WaitUtils(driver).waitUntilPageLoaded(5);
+        waitUtils.waitUntilPageLoaded();
         clickWebElement(loginLink);
     }
 }
