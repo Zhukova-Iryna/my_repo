@@ -9,7 +9,6 @@ import static org.testng.Assert.*;
 public class SearchPageTest extends BaseTest {
     private SearchPage searchPage;
 
-
     @BeforeClass
     protected void setUp() {
         driver.get(searchUrl);
