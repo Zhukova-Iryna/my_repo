@@ -96,7 +96,7 @@ public class MainPage extends BasePage {
     }
 
     public String getAttributeForLoginUserLogoutForm() {
-        new WaitUtils(driver).waitUntilPageLoaded();
+        waitUtils.waitUntilPageLoaded();
         clickWebElement(userAccount);
         return waitUtils.waitForElement(loginUsersSignOut).getAttribute("style");
     }
