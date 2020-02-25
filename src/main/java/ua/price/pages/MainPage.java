@@ -4,9 +4,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ua.price.base.BasePage;
+import ua.price.utils.WaitUtils;
 
 public class MainPage extends BasePage {
 
@@ -63,16 +62,14 @@ public class MainPage extends BasePage {
     }
 
     public void fillLoginForm(String email, String password) {
-        waitUntilPageLoaded();
-        clickWebElement(loginLink);
+        openLoginForm();
         enterTextInTextField(emailField, email);
         enterTextInTextField(passwordField, password);
         clickWebElement(submitLoginButton);
     }
 
     public void fillRegistrationForm(String email, String password) {
-        waitUntilPageLoaded();
-        clickWebElement(loginLink);
+        openLoginForm();
         clickWebElement(registrationTab);
         enterTextInTextField(regEmailField, email);
         enterTextInTextField(regPasswordField, password);
@@ -94,20 +91,18 @@ public class MainPage extends BasePage {
 
     public SearchPage runSearch(String searchRequest) {
         searchFieldInput.sendKeys(searchRequest + Keys.ENTER);
+        waitUtils.waitUntilPageLoaded();
         return new SearchPage(driver);
     }
 
-    public void waitUntilPageLoaded() {
-        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(popularCategoryAd));
-    }
-
     public String getAttributeForLoginUserLogoutForm() {
+        waitUtils.waitUntilPageLoaded();
         clickWebElement(userAccount);
-        return loginUsersSignOut.getAttribute("style");
+        return waitUtils.waitForElement(loginUsersSignOut).getAttribute("style");
     }
 
-    public UserAccountPage openUserAccount(String email, String password) {
-        fillLoginForm(email, password);
-        return new UserAccountPage(driver);
+    public void openLoginForm() {
+        waitUtils.waitUntilPageLoaded();
+        clickWebElement(loginLink);
     }
 }

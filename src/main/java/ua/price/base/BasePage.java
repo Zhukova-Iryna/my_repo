@@ -3,17 +3,20 @@ package ua.price.base;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import ua.price.utils.WaitUtils;
 
 public abstract class BasePage {
     public WebDriver driver;
+    protected WaitUtils waitUtils;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        waitUtils = new WaitUtils(driver);
     }
 
-    public static void enterTextInTextField(WebElement textField, String inputText) {
-        textField.click();
+    public void enterTextInTextField(WebElement textField, String inputText) {
+        clickWebElement(textField);
         textField.clear();
         textField.sendKeys(inputText);
     }
@@ -22,7 +25,7 @@ public abstract class BasePage {
         return webElement.getText();
     }
 
-    public static void clickWebElement(WebElement webElement) {
-        webElement.click();
+    public void clickWebElement(WebElement webElement) {
+        waitUtils.elementToBeClickable(webElement).click();
     }
 }
