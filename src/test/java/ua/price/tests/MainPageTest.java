@@ -2,53 +2,63 @@ package ua.price.tests;
 
 import org.testng.annotations.*;
 import ua.price.base.BaseTest;
-import ua.price.pages.MainPage;
-import ua.price.pages.SearchPage;
+import ua.price.data.bean.user.User;
+import ua.price.steps.AuthenticationSteps;
 
 import static org.testng.Assert.*;
 
 public class MainPageTest extends BaseTest {
-    private MainPage mainPage;
+    private AuthenticationSteps authSteps;
+    private User user;
 
     @BeforeClass
     protected void setUp() {
-        driver.get(baseUrl);
-        mainPage = new MainPage(driver);
+        driver.get(pagesUrl.baseUrl());
+        authSteps = new AuthenticationSteps(driver);
+        user = new User();
     }
 
     @Test
     protected void checkPositiveLoginScenario() {
-        mainPage.fillLoginForm(email, password);
-        assertNotEquals(mainPage.getAccountName(), "Вход", "Text doesn't change in authentication block");
+        authSteps.openAuthenticationForm();
+        authSteps.login(user.email(), user.password());
+        authSteps.waitUntilPageLoaded();
+        assertNotEquals(authSteps.getAccountLinkName(), "Вход", "Text doesn't change in authentication block");
     }
 
     @Test
     protected void checkNegativeLoginScenario() {
-        mainPage.fillLoginForm(email, regPassword);
-        assertTrue(mainPage.checkErrorLoginMessageAppears(), "Error message doesn't appears");
+        authSteps.openAuthenticationForm();
+        authSteps.login(user.email(), user.regPassword());
+        authSteps.waitUntilPageLoaded();
+        assertTrue(authSteps.isErrorMessageDisplayed(), "Error message doesn't appears");
     }
 
     @Test
     protected void checkPositiveRegistrationScenario() {
-        mainPage.fillRegistrationForm(regEmail, regPassword);
-        assertTrue(mainPage.checkConfirmRegistrationMessageAppears(), "Successful registration message doesn't appear");
+        authSteps.openAuthenticationForm();
+        authSteps.openRegistrationTabInAuthenticationForm();
+        authSteps.registration(user.regEmail(), user.regPassword());
+        authSteps.waitUntilPageLoaded();
+        assertTrue(authSteps.isSuccessfulRegistrationMessageAppears(), "Successful registration message doesn't appear");
     }
 
     @Test
     protected void checkNegativeRegistrationScenario() {
-        mainPage.fillRegistrationForm(email, regPassword);
-        assertTrue(mainPage.checkErrorLoginMessageAppears(), "Error message doesn't appears");
-    }
-
-    @Test
-    protected void checkSearchPageOpens() {
-        SearchPage searchPage = mainPage.runSearch(searchRequest);
-        assertTrue(searchPage.driver.getTitle().contains("Поиск"), "Search page doesn't open");
+        authSteps.openAuthenticationForm();
+        authSteps.openRegistrationTabInAuthenticationForm();
+        authSteps.registration(user.email(), user.regPassword());
+        authSteps.waitUntilPageLoaded();
+        assertTrue(authSteps.isErrorMessageDisplayed(), "Error message doesn't appears");
     }
 
     @Test
     protected void checkUsersLogout() {
-        mainPage.fillLoginForm(email, password);
-        assertNotEquals(mainPage.getAttributeForLoginUserLogoutForm(), "display: none;", "Users logout form doesn't open");
+        authSteps.waitUntilPageLoaded();
+        authSteps.openAuthenticationForm();
+        authSteps.login(user.email(), user.password());
+        authSteps.waitUntilPageLoaded();
+        authSteps.logout();
+        assertEquals(authSteps.getAccountLinkName(), "Вход", "User doesn't logout");
     }
 }

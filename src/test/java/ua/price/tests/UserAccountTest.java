@@ -4,20 +4,23 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ua.price.base.BaseTest;
-import ua.price.pages.UserAccountPage;
+import ua.price.data.bean.user.User;
+import ua.price.steps.UserAccountSteps;
 
 public class UserAccountTest extends BaseTest {
-    private UserAccountPage accountPage;
+    private UserAccountSteps userAccountSteps;
+    private User user;
 
     @BeforeClass
     protected void setUp() {
-        driver.get(accountUrl);
-        accountPage = new UserAccountPage(driver);
-        accountPage.loginToAccount(email, password);
+        driver.get(pagesUrl.accountUrl());
+        userAccountSteps = new UserAccountSteps(driver);
+        user = new User();
     }
 
     @Test
     protected void checkHobbyChosenSave() {
-        Assert.assertTrue(accountPage.isHobbyChecked(), "Wrong setting for hobby");
+        userAccountSteps.loginToAccount(user.email(), user.password());
+        Assert.assertTrue(userAccountSteps.isHobbyChecked(), "Wrong setting for hobby");
     }
 }

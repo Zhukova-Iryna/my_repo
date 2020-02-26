@@ -1,5 +1,7 @@
 package ua.price.pages;
 
+import lombok.Getter;
+import lombok.experimental.Accessors;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,6 +9,8 @@ import ua.price.base.BasePage;
 
 import java.util.List;
 
+@Accessors(fluent = true)
+@Getter
 public class SearchPage extends BasePage {
 
     @FindBy(xpath = ".//div[@id='page-breadcrumbs']")
@@ -23,20 +27,5 @@ public class SearchPage extends BasePage {
 
     public SearchPage(WebDriver driver) {
         super(driver);
-    }
-
-    public int getNumbersOfElementsAccordingToValue(String value) {
-        int counter = 0;
-        for (WebElement we : searchResultList) {
-            if (we.getText().contains(value)) {
-                counter++;
-            }
-        }
-        return counter;
-    }
-
-    public String getElement() {
-        System.out.println(pageBreadcrumbs.isEnabled());
-        return pageBreadcrumbs.getTagName();
     }
 }

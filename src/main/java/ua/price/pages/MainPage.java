@@ -1,18 +1,20 @@
 package ua.price.pages;
 
-import org.openqa.selenium.Keys;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ua.price.base.BasePage;
-import ua.price.utils.WaitUtils;
 
+@Accessors(fluent = true)
+@Getter
 public class MainPage extends BasePage {
 
     @FindBy(xpath = ".//div[@id='auth-user-block']")
     private WebElement loginLink;
 
-    @FindBy(xpath = ".//a[@id='header-user-link']")
+    @FindBy(xpath = "(.//a[contains(@class,'header-user-link')])[1]")
     private WebElement userAccount;
 
     @FindBy(xpath = ".//input[@id='SearchForm_searchPhrase']")
@@ -51,7 +53,7 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//div[@id='google_ads_iframe_/6560281/Price_Promo_text_1_0__container__']")
     private WebElement popularCategoryAd;
 
-    @FindBy(xpath = ".//div[@id='auth-user-links']")
+    @FindBy(xpath = ".//form[@id='logout_form_yw4']")
     private WebElement loginUsersSignOut;
 
     @FindBy(xpath = ".//a[@class='i-profile']")
@@ -59,50 +61,5 @@ public class MainPage extends BasePage {
 
     public MainPage(WebDriver driver) {
         super(driver);
-    }
-
-    public void fillLoginForm(String email, String password) {
-        openLoginForm();
-        enterTextInTextField(emailField, email);
-        enterTextInTextField(passwordField, password);
-        clickWebElement(submitLoginButton);
-    }
-
-    public void fillRegistrationForm(String email, String password) {
-        openLoginForm();
-        clickWebElement(registrationTab);
-        enterTextInTextField(regEmailField, email);
-        enterTextInTextField(regPasswordField, password);
-        clickWebElement(submitRegistration);
-    }
-
-    public String getAccountName() {
-        return userAccount.getText();
-    }
-
-    public boolean checkErrorLoginMessageAppears() {
-        System.out.println(errorLabel.getText());
-        return errorLabel.isDisplayed();
-    }
-
-    public boolean checkConfirmRegistrationMessageAppears() {
-        return confirmRegistrationMessage.isDisplayed();
-    }
-
-    public SearchPage runSearch(String searchRequest) {
-        searchFieldInput.sendKeys(searchRequest + Keys.ENTER);
-        waitUtils.waitUntilPageLoaded();
-        return new SearchPage(driver);
-    }
-
-    public String getAttributeForLoginUserLogoutForm() {
-        waitUtils.waitUntilPageLoaded();
-        clickWebElement(userAccount);
-        return waitUtils.waitForElement(loginUsersSignOut).getAttribute("style");
-    }
-
-    public void openLoginForm() {
-        waitUtils.waitUntilPageLoaded();
-        clickWebElement(loginLink);
     }
 }

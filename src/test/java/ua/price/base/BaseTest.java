@@ -5,20 +5,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.*;
+import ua.price.data.PagesUrl;
 import ua.price.properties.PropertyReader;
 
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
     protected WebDriver driver;
-    protected String baseUrl;
-    protected String email;
-    protected String password;
-    protected String regEmail;
-    protected String regPassword;
+    protected PagesUrl pagesUrl;
     protected String searchRequest;
-    protected String searchUrl;
-    protected String accountUrl;
 
     @Parameters("browser")
     @BeforeClass
@@ -26,14 +21,8 @@ public abstract class BaseTest {
         initDrivers(browser);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        baseUrl = PropertyReader.getProperty("base_url");
-        email = PropertyReader.getProperty("login_email");
-        password = PropertyReader.getProperty("login_password");
-        regEmail = PropertyReader.getProperty("reg_email");
-        regPassword = PropertyReader.getProperty("reg_password");
+        pagesUrl = new PagesUrl();
         searchRequest = PropertyReader.getProperty("search_request");
-        searchUrl = PropertyReader.getProperty("search_url");
-        accountUrl = PropertyReader.getProperty("account_url");
     }
 
     private void initDrivers(String browser) {
