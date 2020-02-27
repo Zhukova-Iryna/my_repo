@@ -3,21 +3,18 @@ package ua.price.tests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import ua.price.base.BaseTest;
-import ua.price.pages.UserAccountPage;
+import ua.price.site.base.BaseTest;
 
 public class UserAccountTest extends BaseTest {
-    private UserAccountPage accountPage;
-
     @BeforeClass
     protected void setUp() {
-        driver.get(accountUrl);
-        accountPage = new UserAccountPage(driver);
-        accountPage.loginToAccount(email, password);
+        driver.get(pagesUrl.accountUrl());
     }
 
     @Test
     protected void checkHobbyChosenSave() {
-        Assert.assertTrue(accountPage.isHobbyChecked(), "Wrong setting for hobby");
+        userAccountSteps.loginToAccount(user);
+        userAccountSteps.setCheckingHobby(driver);
+        Assert.assertTrue(userAccountSteps.isSuccessSaveMessageAppears(), "Wrong setting for hobby");
     }
 }

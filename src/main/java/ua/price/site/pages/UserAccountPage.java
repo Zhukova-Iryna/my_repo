@@ -1,10 +1,14 @@
-package ua.price.pages;
+package ua.price.site.pages;
 
+import lombok.Getter;
+import lombok.experimental.Accessors;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import ua.price.base.BasePage;
+import ua.price.site.base.BasePage;
 
+@Accessors(fluent = true)
+@Getter
 public class UserAccountPage extends BasePage {
 
     @FindBy(xpath = ".//input[@id='LoginForm_username']")
@@ -36,24 +40,5 @@ public class UserAccountPage extends BasePage {
 
     public UserAccountPage(WebDriver driver) {
         super(driver);
-    }
-
-    public boolean isHobbyChecked() {
-        return checkBoxTourismHobby.isSelected();
-    }
-
-    public void loginToAccount(String email, String password) {
-        loginEmailInput.sendKeys(email);
-        loginPasswordInput.sendKeys(password);
-        loginSubmit.click();
-    }
-
-    public void logOut() {
-        clickWebElement(accountIcon);
-        clickWebElement(logoutLink);
-    }
-
-    public boolean isSuccessMessageAppears() {
-        return successMessage.isDisplayed();
     }
 }
