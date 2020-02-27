@@ -1,11 +1,12 @@
-package ua.price.steps;
+package ua.price.site.base_steps;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import ua.price.pages.ItemPage;
-import ua.price.pages.MainPage;
-import ua.price.pages.SearchPage;
-import ua.price.pages.UserAccountPage;
+import ua.price.site.pages.ItemPage;
+import ua.price.site.pages.MainPage;
+import ua.price.site.pages.SearchPage;
+import ua.price.site.pages.UserAccountPage;
 import ua.price.utils.WaitUtils;
 
 public abstract class BaseSteps {
@@ -36,14 +37,19 @@ public abstract class BaseSteps {
     }
 
     public String getTextFromElement(WebElement webElement) {
-        return webElement.getText();
+        return waitUtils.waitForElement(webElement).getText();
     }
 
     public void clickWebElement(WebElement webElement) {
-        waitUtils.elementToBeClickable(webElement).click();
+        waitUtils.clickWhenReady(webElement);
     }
 
     public String getPageTitle() {
         return this.driver.getTitle();
+    }
+
+    public void jsClickWebElement(WebElement webElement) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", webElement);
     }
 }

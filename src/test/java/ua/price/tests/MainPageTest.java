@@ -1,63 +1,59 @@
 package ua.price.tests;
 
 import org.testng.annotations.*;
-import ua.price.base.BaseTest;
-import ua.price.data.bean.user.User;
-import ua.price.steps.AuthenticationSteps;
+import ua.price.site.base.BaseTest;
 
 import static org.testng.Assert.*;
 
 public class MainPageTest extends BaseTest {
-    private AuthenticationSteps authSteps;
-    private User user;
-
     @BeforeClass
     protected void setUp() {
         driver.get(pagesUrl.baseUrl());
-        authSteps = new AuthenticationSteps(driver);
-        user = new User();
     }
 
     @Test
     protected void checkPositiveLoginScenario() {
+        authSteps.openMainPage();
         authSteps.openAuthenticationForm();
-        authSteps.login(user.email(), user.password());
+        authSteps.login(user);
         authSteps.waitUntilPageLoaded();
         assertNotEquals(authSteps.getAccountLinkName(), "Вход", "Text doesn't change in authentication block");
     }
 
     @Test
     protected void checkNegativeLoginScenario() {
+        authSteps.openMainPage();
         authSteps.openAuthenticationForm();
-        authSteps.login(user.email(), user.regPassword());
+        authSteps.login(user);
         authSteps.waitUntilPageLoaded();
         assertTrue(authSteps.isErrorMessageDisplayed(), "Error message doesn't appears");
     }
 
     @Test
     protected void checkPositiveRegistrationScenario() {
+        authSteps.openMainPage();
         authSteps.openAuthenticationForm();
         authSteps.openRegistrationTabInAuthenticationForm();
-        authSteps.registration(user.regEmail(), user.regPassword());
+        authSteps.registration(user);
         authSteps.waitUntilPageLoaded();
         assertTrue(authSteps.isSuccessfulRegistrationMessageAppears(), "Successful registration message doesn't appear");
     }
 
     @Test
     protected void checkNegativeRegistrationScenario() {
+        authSteps.openMainPage();
         authSteps.openAuthenticationForm();
         authSteps.openRegistrationTabInAuthenticationForm();
-        authSteps.registration(user.email(), user.regPassword());
+        authSteps.registration(user);
         authSteps.waitUntilPageLoaded();
         assertTrue(authSteps.isErrorMessageDisplayed(), "Error message doesn't appears");
     }
 
     @Test
     protected void checkUsersLogout() {
-        authSteps.waitUntilPageLoaded();
+        authSteps.openMainPage();
         authSteps.openAuthenticationForm();
-        authSteps.login(user.email(), user.password());
-        authSteps.waitUntilPageLoaded();
+        authSteps.login(user);
         authSteps.logout();
         assertEquals(authSteps.getAccountLinkName(), "Вход", "User doesn't logout");
     }

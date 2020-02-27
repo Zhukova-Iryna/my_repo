@@ -1,8 +1,8 @@
 package ua.price.tests;
 
 import org.testng.annotations.*;
-import ua.price.base.BaseTest;
-import ua.price.steps.SearchSteps;
+import ua.price.properties.PropertyReader;
+import ua.price.site.base.BaseTest;
 
 import java.util.List;
 
@@ -10,12 +10,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.*;
 
 public class SearchPageTest extends BaseTest {
-    private SearchSteps searchSteps;
+    private String searchRequest;
 
     @BeforeClass
     protected void setUp() {
         driver.get(pagesUrl.searchUrl());
-        searchSteps = new SearchSteps(driver);
+        searchRequest = PropertyReader.getProperty("search_request");
     }
 
     @Test
@@ -25,7 +25,7 @@ public class SearchPageTest extends BaseTest {
 
     @Test
     protected void testRelevantSearchResultsTest() {
-        searchSteps.waitUntilPageLoaded();
+        searchSteps.searchPageLoaded();
         System.out.println(searchRequest);
         assertTrue(searchSteps.getNumbersOfElementsAccordingToSearchRequest(searchRequest) > 0, "Search results are invalid");
     }

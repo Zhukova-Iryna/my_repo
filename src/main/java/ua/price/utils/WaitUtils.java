@@ -59,8 +59,13 @@ public class WaitUtils {
         }
     }
 
-    public WebElement elementToBeClickable(WebElement webElement) {
-        return new WebDriverWait(driver, TIMEOUT).until(ExpectedConditions.elementToBeClickable(webElement));
+    public void clickWhenReady(WebElement webElement) {
+        try {
+            new WebDriverWait(driver, TIMEOUT).until(ExpectedConditions.elementToBeClickable(webElement)).click();
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public boolean isElementSelected(WebElement webElement) {
@@ -135,8 +140,12 @@ public class WaitUtils {
         }
     }
 
-    public WebElement elementToBetVisible(WebElement webElement) {
+    public WebElement elementToBeVisible(WebElement webElement) {
         return new WebDriverWait(driver, TIMEOUT).until(ExpectedConditions.visibilityOf(webElement));
+    }
+
+    public boolean isElementDisplayed(WebElement webElement) {
+        return new WebDriverWait(driver, TIMEOUT).until(ExpectedConditions.visibilityOf(webElement)) != null;
     }
 
     public List<WebElement> allElementsAreVisible(List<WebElement> elementList) {
@@ -153,7 +162,7 @@ public class WaitUtils {
     }
 
     public WebElement waitForElement(WebElement webElement) {
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+        Wait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(FLUENT_TIMEOUT))
                 .pollingEvery(Duration.ofMillis(POLLING_WAIT))
                 .ignoring(NoSuchElementException.class);

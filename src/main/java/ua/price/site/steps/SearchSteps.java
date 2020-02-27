@@ -1,7 +1,8 @@
-package ua.price.steps;
+package ua.price.site.steps;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import ua.price.site.base_steps.BaseSteps;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,10 @@ import java.util.List;
 public class SearchSteps extends BaseSteps {
     public SearchSteps(WebDriver driver) {
         super(driver);
+    }
+
+    public void searchPageLoaded() {
+        waitUntilPageLoaded();
     }
 
     public int getNumbersOfElementsAccordingToSearchRequest(String value) {

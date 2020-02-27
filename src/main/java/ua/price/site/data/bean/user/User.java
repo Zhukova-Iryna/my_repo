@@ -1,4 +1,4 @@
-package ua.price.data.bean.user;
+package ua.price.site.data.bean.user;
 
 import lombok.Getter;
 import lombok.Setter;

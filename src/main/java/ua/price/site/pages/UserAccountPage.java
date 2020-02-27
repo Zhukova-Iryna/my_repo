@@ -1,11 +1,11 @@
-package ua.price.pages;
+package ua.price.site.pages;
 
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import ua.price.base.BasePage;
+import ua.price.site.base.BasePage;
 
 @Accessors(fluent = true)
 @Getter

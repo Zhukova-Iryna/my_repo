@@ -1,4 +1,4 @@
-package ua.price.base;
+package ua.price.site.base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;

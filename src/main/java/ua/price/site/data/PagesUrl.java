@@ -1,4 +1,4 @@
-package ua.price.data;
+package ua.price.site.data;
 
 import lombok.Getter;
 import lombok.Setter;

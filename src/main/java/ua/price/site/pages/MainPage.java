@@ -1,11 +1,11 @@
-package ua.price.pages;
+package ua.price.site.pages;
 
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import ua.price.base.BasePage;
+import ua.price.site.base.BasePage;
 
 @Accessors(fluent = true)
 @Getter
@@ -53,7 +53,7 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//div[@id='google_ads_iframe_/6560281/Price_Promo_text_1_0__container__']")
     private WebElement popularCategoryAd;
 
-    @FindBy(xpath = ".//form[@id='logout_form_yw4']")
+    @FindBy(xpath = ".//a[@class='i-logout']")
     private WebElement loginUsersSignOut;
 
     @FindBy(xpath = ".//a[@class='i-profile']")
