@@ -14,24 +14,24 @@ public class SearchPageTest extends BaseTest {
 
     @BeforeClass
     protected void setUp() {
-        driver.get(pagesUrl.searchUrl());
         searchRequest = PropertyReader.getProperty("search_request");
     }
 
     @Test
     protected void testSearchPageOpens() {
+        searchSteps.openSearchPage(pagesUrl);
         assertTrue(searchSteps.getPageTitle().contains("Поиск"), "Search page doesn't open");
     }
 
     @Test
     protected void testRelevantSearchResultsTest() {
-        searchSteps.searchPageLoaded();
-        System.out.println(searchRequest);
+        searchSteps.openSearchPage(pagesUrl);
         assertTrue(searchSteps.getNumbersOfElementsAccordingToSearchRequest(searchRequest) > 0, "Search results are invalid");
     }
 
     @Test
     protected void testSortingPriceInAscendingOrder() {
+        searchSteps.openSearchPage(pagesUrl);
         searchSteps.selectItemForSortingTest();
         searchSteps.selectAllPriceOffers();
         searchSteps.selectSortingPriceInAscendingOrder();

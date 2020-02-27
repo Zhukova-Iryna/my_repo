@@ -11,14 +11,14 @@ public class UserAccountSteps extends BaseSteps {
     }
 
     public void loginToAccount(User user) {
-        waitUntilPageLoaded();
+        waitUtils.waitUntilPageLoaded();
         enterTextInTextField(userAccountPage.loginEmailInput(), user.email());
         enterTextInTextField(userAccountPage.loginPasswordInput(), user.password());
         clickWebElement(userAccountPage.loginSubmit());
     }
 
     public void setCheckingHobby(WebDriver driver) {
-        waitUntilPageLoaded();
+        waitUtils.waitUntilPageLoaded();
         Actions actions = new Actions(driver);
         actions.moveToElement(userAccountPage.saveButton());
         if (waitUtils.isElementSelected(userAccountPage.checkBoxTourismHobby())) {
@@ -32,12 +32,12 @@ public class UserAccountSteps extends BaseSteps {
     }
 
     public boolean isHobbyChecked() {
-        waitUntilPageLoaded();
+        waitUtils.waitUntilPageLoaded();
         return waitUtils.isElementSelected(userAccountPage.checkBoxTourismHobby());
     }
 
     public boolean isSuccessSaveMessageAppears() {
-        waitUntilPageLoaded();
+        waitUtils.waitUntilPageLoaded();
         return waitUtils.isElementDisplayed(userAccountPage.successMessage());
     }
 }

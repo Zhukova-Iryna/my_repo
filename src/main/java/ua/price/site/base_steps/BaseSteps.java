@@ -10,7 +10,7 @@ import ua.price.site.pages.UserAccountPage;
 import ua.price.utils.WaitUtils;
 
 public abstract class BaseSteps {
-    private WebDriver driver;
+    protected WebDriver driver;
     protected WaitUtils waitUtils;
     protected MainPage mainPage;
     protected UserAccountPage userAccountPage;
@@ -24,10 +24,6 @@ public abstract class BaseSteps {
         userAccountPage = new UserAccountPage(driver);
         searchPage = new SearchPage(driver);
         itemPage = new ItemPage(driver);
-    }
-
-    public void waitUntilPageLoaded() {
-        waitUtils.waitUntilPageLoaded();
     }
 
     public void enterTextInTextField(WebElement textField, String inputText) {

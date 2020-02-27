@@ -18,7 +18,7 @@ public abstract class BaseTest {
     protected PagesUrl pagesUrl;
     protected User user;
 
-    @Parameters("browser")
+    @Parameters({"browser"})
     @BeforeClass
     protected void setUp(@Optional("chrome") String browser) {
         this.driver = initDrivers(browser);

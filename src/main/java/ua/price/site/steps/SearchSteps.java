@@ -3,6 +3,7 @@ package ua.price.site.steps;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ua.price.site.base_steps.BaseSteps;
+import ua.price.site.data.PagesUrl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +13,9 @@ public class SearchSteps extends BaseSteps {
         super(driver);
     }
 
-    public void searchPageLoaded() {
-        waitUntilPageLoaded();
+    public void openSearchPage(PagesUrl pagesUrl) {
+        driver.get(pagesUrl.searchUrl());
+        waitUtils.waitUntilPageLoaded();
     }
 
     public int getNumbersOfElementsAccordingToSearchRequest(String value) {
@@ -28,19 +30,19 @@ public class SearchSteps extends BaseSteps {
 
     public void selectItemForSortingTest() {
         clickWebElement(searchPage.itemPageButton());
-        waitUntilPageLoaded();
+        waitUtils.waitUntilPageLoaded();
     }
 
     public void selectAllPriceOffers() {
         clickWebElement(itemPage.priceOffersTab());
-        waitUntilPageLoaded();
+        waitUtils.waitUntilPageLoaded();
     }
 
     public void selectSortingPriceInAscendingOrder() {
         clickWebElement(itemPage.sortingList());
-        waitUntilPageLoaded();
+        waitUtils.waitUntilPageLoaded();
         clickWebElement(itemPage.ascendingPriceSorting());
-        waitUntilPageLoaded();
+        waitUtils.waitUntilPageLoaded();
     }
 
     public List<Integer> getIntegerPriceValueFromPriceOffers() {
