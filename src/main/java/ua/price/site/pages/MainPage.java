@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ua.price.site.base.BasePage;
 
+import java.util.List;
+
 @Accessors(fluent = true)
 @Getter
 public class MainPage extends BasePage {
@@ -58,6 +60,9 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = ".//a[@class='i-profile']")
     private WebElement goToProfileLink;
+
+    @FindBy(xpath = ".//a[@class='wishlist-panel-link']")
+    private WebElement wishListLink;
 
     public MainPage(WebDriver driver) {
         super(driver);

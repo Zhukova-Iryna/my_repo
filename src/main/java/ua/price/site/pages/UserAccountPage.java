@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ua.price.site.base.BasePage;
 
+import java.util.List;
+
 @Accessors(fluent = true)
 @Getter
 public class UserAccountPage extends BasePage {
@@ -36,7 +38,25 @@ public class UserAccountPage extends BasePage {
     private WebElement accountIcon;
 
     @FindBy(xpath = ".//div[contains(@class,'alert-success')]")
-    WebElement successMessage;
+    private WebElement successMessage;
+
+    @FindBy(xpath = "(.//ul[@id='yw1']/li)[4]")
+    private WebElement userWishListLink;
+
+    @FindBy(xpath = ".//div[contains(@class,'wishlist-list-item')]")
+    private List<WebElement> wishListItems;
+
+    @FindBy(xpath = ".//a[contains(@class,'create_wishlist_cabinet')]")
+    private WebElement createNewWishListButton;
+
+    @FindBy(xpath = ".//input[@id='wishlist-name']")
+    private WebElement newWishListNameInput;
+
+    @FindBy(xpath = ".//button[contains(@class,'btn-create-list')]")
+    private WebElement saveNewWishListButton;
+
+    @FindBy(xpath = ".//a[contains(@class,'wishlist-chips-item')]/a")
+    private List<WebElement> wishLists;
 
     public UserAccountPage(WebDriver driver) {
         super(driver);

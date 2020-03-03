@@ -50,4 +50,50 @@ public class SearchSteps extends BaseSteps {
         itemPage.pricesFromPriceOffers().forEach(element -> prices.add(Integer.parseInt(getTextFromElement(element).replaceAll("\\D", ""))));
         return prices;
     }
+
+    public void selectProducerSamsung() {
+        jsClickWebElement(searchPage.selectProducerSamsung());
+        waitUtils.waitUntilPageLoaded();
+    }
+
+    public void addItemsFromPage(List<WebElement> listForAdding) {
+        listForAdding.addAll(searchPage.searchResultList());
+    }
+
+    public void addItemsPriceFromPage(List<Integer> listForAdding) {
+        listForAdding.addAll(getIntegerPricesFromSearchResults());
+    }
+
+    public boolean isPaginationHasNextPage() {
+        actions.moveToElement(searchPage.pagination());
+        int currentPage = Integer.parseInt(getTextFromElement(searchPage.selectedPage()));
+        jsClickWebElement(searchPage.nextPage());
+        waitUtils.waitUntilPageLoaded();
+        return Integer.parseInt(getTextFromElement(searchPage.selectedPage())) != currentPage;
+    }
+
+    public int getIndicatedAmountOfItemsForProducerSamsung() {
+        return Integer.parseInt(getTextFromElement(searchPage.amountOfItemsForSelectedProducerSamsung()));
+    }
+
+    public void input200InMinPriceAnd400InMaxPrice() {
+        enterTextInTextField(searchPage.minPriceInput(), "200");
+        enterTextInTextField(searchPage.maxPriceInput(), "400");
+        jsClickWebElement(searchPage.submitFilterButton());
+        waitUtils.waitUntilPageLoaded();
+    }
+
+    public List<Integer> getIntegerPricesFromSearchResults() {
+        List<Integer> prices = new ArrayList<>();
+        searchPage.pricesFromSearchResults().forEach(element -> prices.add(Integer.parseInt(getTextFromElement(element).replaceAll("\\D", ""))));
+        return prices;
+    }
+
+    public void addItemToComparing() {
+        jsClickWebElement(searchPage.addToCompareCheckBoxes().get(0));
+    }
+
+    public int getAmountOfItemsForComparing() {
+        return Integer.parseInt(searchPage.headerCompareLink().getAttribute("value"));
+    }
 }

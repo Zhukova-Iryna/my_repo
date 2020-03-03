@@ -3,6 +3,7 @@ package ua.price.site.base_steps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import ua.price.site.pages.ItemPage;
 import ua.price.site.pages.MainPage;
 import ua.price.site.pages.SearchPage;
@@ -12,6 +13,7 @@ import ua.price.utils.WaitUtils;
 public abstract class BaseSteps {
     protected WebDriver driver;
     protected WaitUtils waitUtils;
+    protected Actions actions;
     protected MainPage mainPage;
     protected UserAccountPage userAccountPage;
     protected SearchPage searchPage;
@@ -20,6 +22,7 @@ public abstract class BaseSteps {
     public BaseSteps(WebDriver driver) {
         this.driver = driver;
         waitUtils = new WaitUtils(driver);
+        actions = new Actions(driver);
         mainPage = new MainPage(driver);
         userAccountPage = new UserAccountPage(driver);
         searchPage = new SearchPage(driver);
