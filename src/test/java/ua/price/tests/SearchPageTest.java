@@ -43,6 +43,7 @@ public class SearchPageTest extends BaseTest {
         assertThat(defaultAscendingOrderSortingPrices).containsSequence(defaultAscendingOrderSortingPricesAfterAdditionalSorting);
     }
 
+    @Test
     public void checkIndicatedAmountOfItemsByProducerFiltration() {
         List<WebElement> allItemsAccordingToProducerFilter = new ArrayList<>();
         searchSteps.openSearchPage(pagesUrl);

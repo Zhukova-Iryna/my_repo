@@ -1,5 +1,6 @@
 package ua.price.site.steps;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ua.price.site.base_steps.BaseSteps;
@@ -16,6 +17,10 @@ public class SearchSteps extends BaseSteps {
     public void openSearchPage(PagesUrl pagesUrl) {
         driver.get(pagesUrl.searchUrl());
         waitUtils.waitUntilPageLoaded();
+    }
+
+    public void runSearch(String searchRequest) {
+        enterTextInTextField(mainPage.searchFieldInput(), searchRequest + Keys.ENTER);
     }
 
     public int getNumbersOfElementsAccordingToSearchRequest(String value) {

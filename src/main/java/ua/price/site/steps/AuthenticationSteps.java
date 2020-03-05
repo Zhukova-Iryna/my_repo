@@ -30,10 +30,6 @@ public class AuthenticationSteps extends BaseSteps {
         clickWebElement(mainPage.submitLoginButton());
     }
 
-    public void inputEmail(User user) {
-        enterTextInTextField(mainPage.emailField(), user.email());
-    }
-
     public void registration(User user) {
         enterTextInTextField(mainPage.regEmailField(), user.regEmail());
         enterTextInTextField(mainPage.regPasswordField(), user.regPassword());
