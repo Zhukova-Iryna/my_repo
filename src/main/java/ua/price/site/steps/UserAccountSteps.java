@@ -2,7 +2,6 @@ package ua.price.site.steps;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import ua.price.site.base_steps.BaseSteps;
 import ua.price.site.data.bean.user.User;
 
@@ -20,7 +19,6 @@ public class UserAccountSteps extends BaseSteps {
 
     public void setCheckingHobby(WebDriver driver) {
         waitUtils.waitUntilPageLoaded();
-        Actions actions = new Actions(driver);
         actions.moveToElement(userAccountPage.saveButton());
         if (waitUtils.isElementSelected(userAccountPage.checkBoxTourismHobby())) {
             jsClickWebElement(userAccountPage.checkBoxTourismHobby());

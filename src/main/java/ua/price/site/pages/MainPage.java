@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ua.price.site.base.BasePage;
 
-import java.util.List;
-
 @Accessors(fluent = true)
 @Getter
 public class MainPage extends BasePage {

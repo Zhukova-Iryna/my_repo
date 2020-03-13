@@ -42,7 +42,6 @@ public class UserAccountTest extends BaseTest {
         userAccountSteps.addItemToFavorite();
         userAccountSteps.openWishListsFromMainPage();
         userAccountSteps.selectWishList();
-        System.out.println(userAccountSteps.getAmountOfAddingItemsInWishList());
         Assert.assertTrue(userAccountSteps.getAmountOfAddingItemsInWishList() == ++previousAmount);
     }
 }

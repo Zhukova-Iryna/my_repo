@@ -55,7 +55,7 @@ public class UserAccountPage extends BasePage {
     @FindBy(xpath = ".//button[contains(@class,'btn-create-list')]")
     private WebElement saveNewWishListButton;
 
-    @FindBy(xpath = ".//a[contains(@class,'wishlist-chips-item')]/a")
+    @FindBy(xpath = ".//a[contains(@class,'wishlist-chips-item')]")
     private List<WebElement> wishLists;
 
     public UserAccountPage(WebDriver driver) {

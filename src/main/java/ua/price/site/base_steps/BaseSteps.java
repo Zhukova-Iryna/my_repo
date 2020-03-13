@@ -13,20 +13,21 @@ import ua.price.utils.WaitUtils;
 public abstract class BaseSteps {
     protected WebDriver driver;
     protected WaitUtils waitUtils;
-    protected Actions actions;
     protected MainPage mainPage;
     protected UserAccountPage userAccountPage;
     protected SearchPage searchPage;
     protected ItemPage itemPage;
+    protected Actions actions;
+
 
     public BaseSteps(WebDriver driver) {
         this.driver = driver;
         waitUtils = new WaitUtils(driver);
-        actions = new Actions(driver);
         mainPage = new MainPage(driver);
         userAccountPage = new UserAccountPage(driver);
         searchPage = new SearchPage(driver);
         itemPage = new ItemPage(driver);
+        actions = new Actions(driver);
     }
 
     public void enterTextInTextField(WebElement textField, String inputText) {
