@@ -3,6 +3,7 @@ package ua.price.site.base_steps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import ua.price.site.pages.ItemPage;
 import ua.price.site.pages.MainPage;
 import ua.price.site.pages.SearchPage;
@@ -16,6 +17,8 @@ public abstract class BaseSteps {
     protected UserAccountPage userAccountPage;
     protected SearchPage searchPage;
     protected ItemPage itemPage;
+    protected Actions actions;
+
 
     public BaseSteps(WebDriver driver) {
         this.driver = driver;
@@ -24,6 +27,7 @@ public abstract class BaseSteps {
         userAccountPage = new UserAccountPage(driver);
         searchPage = new SearchPage(driver);
         itemPage = new ItemPage(driver);
+        actions = new Actions(driver);
     }
 
     public void enterTextInTextField(WebElement textField, String inputText) {

@@ -59,6 +59,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//a[@class='i-profile']")
     private WebElement goToProfileLink;
 
+    @FindBy(xpath = ".//a[@class='wishlist-panel-link']")
+    private WebElement wishListLink;
+
     public MainPage(WebDriver driver) {
         super(driver);
     }

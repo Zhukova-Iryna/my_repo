@@ -24,14 +24,14 @@ public class MainPageTest extends BaseTest {
         assertTrue(authSteps.isErrorMessageDisplayed(), "Error message doesn't appears");
     }
 
-    @Test
+  /*  @Test
     protected void checkPositiveRegistrationScenario() {
         authSteps.openMainPage(pagesUrl);
         authSteps.openAuthenticationForm();
         authSteps.openRegistrationTabInAuthenticationForm();
         authSteps.registration(user);
         assertTrue(authSteps.isSuccessfulRegistrationMessageAppears(), "Successful registration message doesn't appear");
-    }
+    }*/
 
     @Test
     protected void checkNegativeRegistrationScenario() {
