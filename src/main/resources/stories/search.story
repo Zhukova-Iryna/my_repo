@@ -16,7 +16,7 @@ Then I should see that the prices shown in ascending order
 
 Scenario: filtered items by producer
 Given I am on the main page and run search by request Samsung A50
-When I select producer 'Samsung' checkbox
+When I select producer Samsung checkbox
 Then I count filtered items and their quantity should correspond to the described
 
 Scenario: filtered items by price range

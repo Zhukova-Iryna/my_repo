@@ -18,15 +18,20 @@ public abstract class BaseTest {
     protected PagesUrl pagesUrl;
     protected User user;
 
-    @Parameters({"browser"})
     @BeforeClass
+    protected void setUp()
+    {
+        pagesUrl = new PagesUrl();
+        user = new User();
+    }
+
+    @Parameters({"browser"})
+    @BeforeMethod
     protected void setUp(@Optional("chrome") String browser) {
         this.driver = initDrivers(browser);
         authSteps = new AuthenticationSteps(driver);
         searchSteps = new SearchSteps(driver);
         userAccountSteps = new UserAccountSteps(driver);
-        pagesUrl = new PagesUrl();
-        user = new User();
     }
 
     @AfterMethod

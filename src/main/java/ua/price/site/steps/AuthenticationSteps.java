@@ -28,6 +28,7 @@ public class AuthenticationSteps extends BaseSteps {
         enterTextInTextField(mainPage.emailField(), user.email());
         enterTextInTextField(mainPage.passwordField(), user.password());
         clickWebElement(mainPage.submitLoginButton());
+        waitUtils.waitUntilPageLoaded();
     }
 
     public void registration(User user) {
@@ -56,5 +57,6 @@ public class AuthenticationSteps extends BaseSteps {
         clickWebElement(mainPage.userAccount());
         waitUtils.waitUntilPageLoaded();
         jsClickWebElement(mainPage.loginUsersSignOut());
+        waitUtils.waitUntilPageLoaded();
     }
 }

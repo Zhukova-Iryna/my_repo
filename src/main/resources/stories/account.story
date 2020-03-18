@@ -1,7 +1,7 @@
 Narrative:
 As a user
 I want to be able to change my account settings
-So that I can improve
+So that I can extend my tools set for picking up exactly what I need
 
 Scenario: save hobby settings
 Given I login to my account with email bu9ira@gmail.com and password test2010

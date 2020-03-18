@@ -2,6 +2,7 @@ package ua.price.bdd_solution.bdd_pages.pages;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ua.price.bdd_solution.bdd_pages.base_page.BasePage;
@@ -10,14 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchPageResults extends BasePage {
+    private By selectedProducer;
+
     @FindBy(xpath = ".//div[contains(@class, 'product-block type')]")
     private List<WebElementFacade> searchResultsList;
 
     @FindBy(xpath = ".//a[contains(@class,'btn-orange')]")
     private WebElementFacade itemPageButton;
-
-    @FindBy(xpath = ".//a[@data-producer-alias='samsung']")
-    private WebElementFacade selectProducerSamsung;
 
     @FindBy(xpath = ".//div[@id='paginator']")
     private WebElementFacade pagination;
@@ -28,9 +28,6 @@ public class SearchPageResults extends BasePage {
     @FindBy(xpath = ".//li[@class='next']")
     private WebElementFacade nextPage;
 
-    @FindBy(xpath = ".//a[@data-producer-alias='samsung']/following-sibling::span")
-    private WebElementFacade amountOfItemsForSelectedProducerSamsung;
-
     @FindBy(xpath = ".//input[@id='price_min_']")
     private WebElementFacade minPriceInput;
 
@@ -40,10 +37,10 @@ public class SearchPageResults extends BasePage {
     @FindBy(xpath = ".//a[contains(@class,'btn-filters-submit')]")
     private WebElementFacade submitFiltrationButton;
 
-    @FindBy(xpath = "(.//span[contains(@class,'add-to-wishlist-link')])[4]")
-    private WebElementFacade addForthSearchResultToFavoriteList;
+    @FindBy(xpath = "(.//span[contains(@class,'add-to-wishlist-link')])")
+    private WebElementFacade addFirstSearchResultToFavoriteList;
 
-    @FindBy(xpath = "(.//div[contains(@class,'existed-lists')])[4]//label")
+    @FindBy(xpath = "(.//div[contains(@class,'existed-lists')])//label")
     private List<WebElementFacade> wishListCheckboxes;
 
     @FindBy(xpath = ".//div[@class='link-container']/span[@class= 'price']")
@@ -76,12 +73,16 @@ public class SearchPageResults extends BasePage {
         listForAdding.addAll(searchResultsList);
     }
 
-    public int getIndicatedAmountOfItemsForProducerSamsung() {
-        return Integer.parseInt(amountOfItemsForSelectedProducerSamsung.getText());
+    public int getIndicatedAmountOfItemsForSelectedProducer() {
+        return Integer.parseInt(getDriver().findElement(selectedProducer).findElement(By.xpath("./following-sibling::span")).getText());
     }
 
-    public void selectProducerSamsung() {
-        clickOn(selectProducerSamsung);
+    public void getProducerElement(String producer) {
+        selectedProducer = By.xpath(String.format(".//a[@data-producer-alias='%s']", producer.toLowerCase()));
+    }
+
+    public void selectProducer() {
+        clickOn(getDriver().findElement(selectedProducer));
         waitPageLoad();
     }
 
@@ -100,7 +101,7 @@ public class SearchPageResults extends BasePage {
 
     public void addFourthItemToFavoritesList() {
         waitPageLoad();
-        clickOn(addForthSearchResultToFavoriteList);
+        clickOn(addFirstSearchResultToFavoriteList);
     }
 
     public void selectDefaultFavoritesListForAddingNewItem() {

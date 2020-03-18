@@ -29,9 +29,9 @@ public class SearchResultsDefinitions {
         searchResultsSteps.selectSortingPriceInAscendingOrder();
     }
 
-    @When("I select producer 'Samsung' checkbox")
-    public void selectProducerSamsung() {
-        searchResultsSteps.selectProducerSamsung();
+    @When("I select producer $producer checkbox")
+    public void selectProducer(@Named("producer") String producer) {
+        searchResultsSteps.selectProducer(producer);
     }
 
     @When("I enter $min_value and $max_value in price range inputs and submit filtration")

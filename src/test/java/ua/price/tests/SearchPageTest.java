@@ -12,12 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.*;
 
 public class SearchPageTest extends BaseTest {
-    private String searchRequest;
-
-    @BeforeClass
-    protected void setUp() {
-        searchRequest = PropertyReader.getProperty("search_request");
-    }
+    private String searchRequest = PropertyReader.getProperty("search_request");;
 
     @Test
     protected void testSearchPageOpens() {

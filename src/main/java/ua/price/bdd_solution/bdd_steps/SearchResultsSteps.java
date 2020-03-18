@@ -51,8 +51,9 @@ public class SearchResultsSteps extends ScenarioSteps {
     }
 
     @Step
-    public void selectProducerSamsung() {
-        searchPageResults.selectProducerSamsung();
+    public void selectProducer(String producer) {
+        searchPageResults.getProducerElement(producer);
+        searchPageResults.selectProducer();
     }
 
     @Step
@@ -74,7 +75,7 @@ public class SearchResultsSteps extends ScenarioSteps {
         do {
             searchPageResults.addItemsFromPage(allItemsAccordingToProducerFilter);
         } while (searchPageResults.isPaginationHasNextPage());
-        assertThat(searchPageResults.getIndicatedAmountOfItemsForProducerSamsung()).isEqualTo(allItemsAccordingToProducerFilter.size());
+        assertThat(searchPageResults.getIndicatedAmountOfItemsForSelectedProducer()).isEqualTo(allItemsAccordingToProducerFilter.size());
     }
 
     @Step

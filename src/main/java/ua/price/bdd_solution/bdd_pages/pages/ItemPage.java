@@ -24,7 +24,7 @@ public class ItemPage extends BasePage {
     @FindBy(xpath = ".//div[contains(@id,'pricelineAnchor')]//span[@class='price']")
     private List<WebElementFacade> pricesFromPriceOffers;
 
-    @FindBy(xpath = ".//div[@class='b24-widget-button-popup b24-widget-button-popup-show']")
+    @FindBy(xpath = ".//div[contains(@class, 'b24-widget-button-popup-show')]")
     private WebElementFacade chat;
 
     @FindBy(xpath = ".//span[@class='b24-widget-button-popup-btn-hide']")

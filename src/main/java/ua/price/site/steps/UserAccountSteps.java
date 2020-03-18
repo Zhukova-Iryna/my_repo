@@ -3,6 +3,7 @@ package ua.price.site.steps;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ua.price.site.base_steps.BaseSteps;
+import ua.price.site.data.PagesUrl;
 import ua.price.site.data.bean.user.User;
 
 public class UserAccountSteps extends BaseSteps {
@@ -10,7 +11,8 @@ public class UserAccountSteps extends BaseSteps {
         super(driver);
     }
 
-    public void loginToAccount(User user) {
+    public void loginToAccount(PagesUrl pagesUrl, User user) {
+        driver.get(pagesUrl.accountUrl());
         waitUtils.waitUntilPageLoaded();
         enterTextInTextField(userAccountPage.loginEmailInput(), user.email());
         enterTextInTextField(userAccountPage.loginPasswordInput(), user.password());
